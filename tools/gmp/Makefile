@@ -7,11 +7,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gmp
-PKG_VERSION:=6.1.1
+PKG_VERSION:=6.1.2
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_SOURCE_URL:=@GNU/gmp/
-PKG_MD5SUM:=e70e183609244a332d80529e7e155a35
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://fossies.org/linux/misc
 
 HOST_FIXUP:=autoreconf
 
