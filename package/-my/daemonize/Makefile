@@ -33,8 +33,8 @@ define Package/daemonize/description
 endef
 
 define Package/daemonize/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/daemonize $(1)/usr/bin/
+	$(INSTALL_DIR) $(1)/usr/sbin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/daemonize $(1)/usr/sbin/
 endef
 
 $(eval $(call BuildPackage,daemonize))
