@@ -32,8 +32,8 @@ ifeq ($(PKG_VERSION),5.4.0)
   PKG_MD5SUM:=4c626ac2a83ef30dfb9260e6f59c2b30
 endif
 
-ifeq ($(PKG_VERSION),6.2.0)
-  PKG_MD5SUM:=9768625159663b300ae4de2f4745fcc4
+ifeq ($(PKG_VERSION),6.3.0)
+  PKG_HASH:=677a7623c7ef6ab99881bc4e048debb6
 endif
 
 ifneq ($(CONFIG_GCC_VERSION_4_8_ARC),)
