@@ -8,7 +8,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/target.mk
 
 PKG_NAME:=fortify-headers
-PKG_VERSION:=0.7
+PKG_VERSION:=0.8
 PKG_RELEASE=1
 
 PKG_SOURCE_URL:=http://dl.2f30.org/releases
