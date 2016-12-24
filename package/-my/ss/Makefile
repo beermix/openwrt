@@ -8,8 +8,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=shadowsocks-libev
-PKG_VERSION:=d2b7e67
-PKG_REV:=d2b7e6702dd6f0f7c2c587b5cfbbbc0a42165899
+PKG_VERSION:=8e52029
+PKG_REV:=8e52029d311df3880ffb1c5bea922f6e0e3cecdd
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2

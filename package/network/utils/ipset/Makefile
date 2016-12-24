@@ -33,7 +33,7 @@ define Package/ipset
 endef
 
 CONFIGURE_ARGS += \
-	--with-kbuild="$(LINUX_DIR)" --enable-static --disable-shared
+	--with-kbuild="$(LINUX_DIR)"
 
 MAKE_FLAGS += \
 	ARCH="$(LINUX_KARCH)" \
@@ -43,11 +43,17 @@ define Build/Compile
 	$(call Build/Compile/Default)
 endef
 
+define Build/InstallDev
+	$(INSTALL_DIR) $(1)/usr/include $(1)/usr/lib $(1)/usr/lib/pkgconfig
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/libipset $(1)/usr/include/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libipset.{a,so*} $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/lib/libipset.pc $(1)/usr/lib/pkgconfig/
+endef
 define Package/ipset/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(CP) $(PKG_INSTALL_DIR)/usr/sbin/ipset $(1)/usr/sbin/
-	#$(INSTALL_DIR) $(1)/usr/lib
-	#$(CP) $(PKG_INSTALL_DIR)/usr/lib/libipset*.so* $(1)/usr/lib/
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libipset*.so* $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,ipset))

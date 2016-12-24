@@ -9,10 +9,10 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=iproute2
 PKG_VERSION:=4.4.0
-PKG_RELEASE:=1
+PKG_RELEASE:=6
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_SOURCE_URL:=http://kernel.org/pub/linux/utils/net/iproute2/
+PKG_SOURCE_URL:=@KERNEL/linux/utils/net/iproute2
 PKG_MD5SUM:=d762653ec3e1ab0d4a9689e169ca184f
 PKG_BUILD_PARALLEL:=1
 PKG_LICENSE:=GPL-2.0
@@ -30,14 +30,15 @@ define Package/iproute2/Default
   MAINTAINER:=Russell Senior <russell@personaltelco.net>
   DEPENDS:= +libnl-tiny
   VARIANT:=$(1)
+  PROVIDES:=$(3)
 endef
 
-define Package/ip
-$(call Package/iproute2/Default,tiny,Minimal)
+define Package/ip-tiny
+$(call Package/iproute2/Default,tiny,Minimal,ip)
   CONFLICTS:=ip-full
 endef
 
-Package/ip-full=$(call Package/iproute2/Default,full,Full)
+Package/ip-full:=$(call Package/iproute2/Default,full,Full,ip)
 
 define Package/tc
 $(call Package/iproute2/Default)
@@ -75,7 +76,7 @@ define Build/Configure
 		$(PKG_BUILD_DIR)/Makefile
 	$(SED) "s,^LIBC_INCLUDE.*,LIBC_INCLUDE=$(STAGING_DIR)/include," \
 		$(PKG_BUILD_DIR)/Makefile
-	echo "static const char SNAPSHOT[] = \"$(PKG_VERSION)-$(PKG_RELEASE)-openwrt\";" \
+	echo "static const char SNAPSHOT[] = \"$(PKG_VERSION)-$(PKG_RELEASE)-lede\";" \
 		> $(PKG_BUILD_DIR)/include/SNAPSHOT.h
 endef
 
@@ -101,7 +102,7 @@ define Build/InstallDev
 	$(CP) $(PKG_BUILD_DIR)/lib/libnetlink.a $(1)/usr/lib/
 endef
 
-define Package/ip/install
+define Package/ip-tiny/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ip/ip $(1)/usr/bin/
 endef
@@ -138,7 +139,7 @@ define Package/nstat/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/misc/nstat $(1)/usr/sbin/
 endef
 
-$(eval $(call BuildPackage,ip))
+$(eval $(call BuildPackage,ip-tiny))
 $(eval $(call BuildPackage,ip-full))
 $(eval $(call BuildPackage,tc))
 $(eval $(call BuildPackage,genl))
